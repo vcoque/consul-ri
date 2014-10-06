@@ -1,0 +1,2 @@
+
+from consulrest import ConsulRest

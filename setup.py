@@ -3,10 +3,10 @@
 from distutils.core import setup
 
 setup(
-    name = 'consular-agent',
+    name = 'consulrest',
     version = '0.1',
     author = 'Vinicius Coque',
     author_email = 'vcoque@gmail.com',
-    packages=['consularagent'],
+    packages=['consulrest'],
     install_requires=['requests']
 )

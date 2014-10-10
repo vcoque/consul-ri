@@ -10,13 +10,13 @@ class KeyValue(object):
     def _get(self, key, recurse=None, keys=None):
         url = self._url + '/' + key
 
+        params = dict()
         if recurse is not None:
-            url += '?recurse'
-
+            params['recurse'] = True
         if keys is not None:
-            url += '?keys'
+            params['keys'] = True
 
-        r = requests.get(url)
+        r = requests.get(url, params=params)
 
         if r.status_code == 200:
             return json.loads(r.text)
@@ -38,6 +38,8 @@ class KeyValue(object):
 
     def delete(self, key, recurse=None):
         url = self._url + '/' + key
+
+        params = dict()
         if recurse is not None:
-            url += '?recurse'
-        requests.delete(url)
+            params['recurse'] = True
+        requests.delete(url, params=params)

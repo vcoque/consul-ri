@@ -21,7 +21,7 @@ class KeyValue(object):
         if r.status_code == 200:
             return json.loads(r.text)
         else:
-            return None
+            r.raise_for_status()
 
     def get(self, key, recurse=None):
         return self._get(key, recurse=recurse)
@@ -29,12 +29,20 @@ class KeyValue(object):
     def list(self, key=''):
         return self._get(key, keys=True)
 
-    def set(self, key, value):
-        r = requests.put(self._url + '/' + key, data=value)
-        if r.status_code == 200 and re.match(r"true", r.text) is not None:
-            return True
+    def set(self, key, value, cas=None):
+        params = dict()
+        if cas is not None:
+            params['cas'] = cas
+
+        r = requests.put(self._url + '/' + key, data=value, params=params)
+
+        if r.status_code == 200:
+            if re.match(r"true", r.text) is not None:
+                return True
+            elif re.match(r"false", r.text) is not None:
+                return False
         else:
-            return False
+           r.raise_for_status()
 
     def delete(self, key, recurse=None):
         url = self._url + '/' + key
@@ -42,4 +50,5 @@ class KeyValue(object):
         params = dict()
         if recurse is not None:
             params['recurse'] = True
-        requests.delete(url, params=params)
+        r = requests.delete(url, params=params)
+        r.raise_for_status()

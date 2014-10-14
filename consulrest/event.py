@@ -12,10 +12,10 @@ class Event(object):
             url += '?name=%s' % (name)
 
         r = requests.get(url)
-        if r.status_code == 200:
+        if r.ok
             return json.loads(r.text)
-        else:
-            return None
+
+        r.raise_for_status()
 
     def fire(self, event, payload=None, node=None, service=None, tag=None):
         url = self._url + "/fire/" + event
@@ -29,7 +29,7 @@ class Event(object):
             params["tag"] = tag
 
         r = requests.put(url, data=payload, params=params)
-        if r.status_code == 200:
+        if r.ok == 200:
             return json.loads(r.text)
-        else:
-            None
+
+        r.raise_for_status()

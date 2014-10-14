@@ -18,7 +18,7 @@ class KeyValue(object):
 
         r = requests.get(url, params=params)
 
-        if r.status_code == 200:
+        if r.ok
             return json.loads(r.text)
         else:
             r.raise_for_status()
@@ -36,7 +36,7 @@ class KeyValue(object):
 
         r = requests.put(self._url + '/' + key, data=value, params=params)
 
-        if r.status_code == 200:
+        if r.ok
             if re.match(r"true", r.text) is not None:
                 return True
             elif re.match(r"false", r.text) is not None:

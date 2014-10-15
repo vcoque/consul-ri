@@ -12,7 +12,7 @@ class Event(object):
             url += '?name=%s' % (name)
 
         r = requests.get(url)
-        if r.ok
+        if r.ok:
             return json.loads(r.text)
 
         r.raise_for_status()

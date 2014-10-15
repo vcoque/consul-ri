@@ -36,7 +36,7 @@ class KeyValue(object):
 
         r = requests.put(self._url + '/' + key, data=value, params=params)
 
-        if r.ok
+        if r.ok:
             if re.match(r"true", r.text) is not None:
                 return True
             elif re.match(r"false", r.text) is not None:

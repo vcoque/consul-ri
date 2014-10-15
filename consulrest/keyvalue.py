@@ -18,7 +18,7 @@ class KeyValue(object):
 
         r = requests.get(url, params=params)
 
-        if r.ok
+        if r.ok:
             return json.loads(r.text)
         else:
             r.raise_for_status()

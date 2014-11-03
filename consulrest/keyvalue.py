@@ -20,13 +20,15 @@ class KeyValue(object):
 
         if r.ok:
             return json.loads(r.text)
+        elif r.status_code == 404:
+            return None
         else:
             r.raise_for_status()
 
     def get(self, key, recurse=None):
         return self._get(key, recurse=recurse)
 
-    def list(self, key=''):
+    def list_keys(self, key=''):
         return self._get(key, keys=True)
 
     def set(self, key, value, cas=None):

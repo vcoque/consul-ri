@@ -21,7 +21,7 @@ class KeyValue(object):
         if r.ok:
             return json.loads(r.text)
         elif r.status_code == 404:
-            return None
+            return []
         else:
             r.raise_for_status()
 

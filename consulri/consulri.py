@@ -5,7 +5,7 @@ DEFAULT_HOST = '127.0.0.1'
 DEFAULT_PORT = 8500
 VERSION = 'v1'
 
-class ConsulRest:
+class ConsulRI:
 
     def __init__(self, host=DEFAULT_HOST, port=DEFAULT_PORT):
         self._host = host

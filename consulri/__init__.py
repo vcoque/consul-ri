@@ -1,2 +1,2 @@
 
-from consulrest import ConsulRest
+from consulrest import ConsulRI
